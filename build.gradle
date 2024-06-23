@@ -1,0 +1,55 @@
+apply plugin: 'java-library'
+apply plugin: 'application'
+apply plugin: 'maven-publish'
+
+group 'org.moddingx'
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.google.code.findbugs:jsr305:3.0.2'
+    implementation 'net.sf.jopt-simple:jopt-simple:5.0.4'
+    implementation 'com.sparkjava:spark-core:2.9.4'
+    implementation 'com.google.guava:guava:33.2.1-jre'
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'org.jtwig:jtwig-core:5.87.0.RELEASE'
+
+    implementation 'org.slf4j:slf4j-api:2.0.7'
+    runtimeOnly 'org.slf4j:slf4j-jdk14:2.0.7'
+}
+
+application.mainClass = "org.moddingx.modbadges.Main"
+
+jar {
+    manifest.attributes([
+            "Main-Class"            : application.mainClass.get(),
+            "Automatic-Module-Name" : "org.moddingx.modbadges",
+            "Implementation-Version": project.version
+    ])
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            pom {
+                licenses {
+                    license {
+                        name = "The Apache License, Version 2.0"
+                        url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+                    }
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            url 'https://maven.moddingx.org/release'
+            credentials(PasswordCredentials)
+        }
+    }
+}
