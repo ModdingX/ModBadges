@@ -15,5 +15,5 @@ You can also set the badge style. Use `?style=flat` at the end of your request. 
 available, it falls back to `default`.
 
 Available styles:
-- `default` ➡️ ![](https://badges.moddingx.org/curseforge/downloads/412525?style=default)
-- `flat` ➡️ ![](https://badges.moddingx.org/curseforge/downloads/412525?style=flat)
+- `default` ➡️ ![](https://badges.moddingx.org/modrinth/downloads/libx?style=default)
+- `flat` ➡️ ![](https://badges.moddingx.org/modrinth/downloads/libx?style=flat)
