@@ -1,5 +1,6 @@
 package org.moddingx.modbadges.route;
 
+import org.moddingx.modbadges.BadgeGenerator;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -46,5 +47,10 @@ public abstract class BadgesRoute<T> implements Route {
         }
 
         return value;
+    }
+
+    protected final BadgeGenerator.BadgeStyle getBadgeStyle(Request request) {
+        String param = request.queryParamOrDefault("style", "default");
+        return BadgeGenerator.BadgeStyle.getBadgeStyle(param);
     }
 }
