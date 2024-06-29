@@ -1,6 +1,5 @@
 # ModBadges
-An API to create uniform badges for [Modrinth](https://modrinth.com/) and [CurseForge](https://www.curseforge.com/)
-projects.
+An API to create uniform badges for [Modrinth](https://modrinth.com/) and [CurseForge](https://www.curseforge.com/) projects.
 
 ## Modrinth badges
 - `/modrinth/downloads/<project_id>` ➡️ ![](https://badges.moddingx.org/modrinth/downloads/libx)

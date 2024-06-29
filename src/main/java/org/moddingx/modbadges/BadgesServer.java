@@ -32,6 +32,15 @@ public class BadgesServer {
 
         ModrinthApi modrinthApi = new ModrinthApi();
         CurseApi curseApi = new CurseApi(curseToken);
+        
+        // Support trailing slashes
+        this.spark.before((req, res) -> {
+            String path = req.pathInfo();
+            if (path.length() > 1 && path.endsWith("/")) {
+                res.redirect(path.substring(0, path.length() - 1));
+            }
+        });
+        
         this.spark.get("/version", new VersionRoute(this.spark, this.version));
         this.spark.get("/modrinth/versions/:projectId", new PlatformBadgeRoute(this.spark, BadgeGenerator.Platform.MODRINTH, BadgeGenerator.BadgeType.GAME_VERSIONS, modrinthApi));
         this.spark.get("/modrinth/downloads/:projectId", new PlatformBadgeRoute(this.spark, BadgeGenerator.Platform.MODRINTH, BadgeGenerator.BadgeType.DOWNLOADS, modrinthApi));
