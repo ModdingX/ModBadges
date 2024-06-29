@@ -43,9 +43,6 @@ public class Main {
 
         OptionSpec<Integer> specPort = options.accepts("port", "The port to run on.").withRequiredArg().ofType(Integer.class);
 
-        OptionSpec<Integer> specThreads = options.accepts("threads", "How many threads the server should use.")
-                .withRequiredArg().ofType(Integer.class).defaultsTo(Math.min(4, Runtime.getRuntime().availableProcessors()));
-
         OptionSet set = options.parse(args);
 
         if (version == null) {
@@ -69,7 +66,7 @@ public class Main {
         }
         String curseToken = docker ? Main.dockerSecret("curse_token") : set.valueOf(specToken);
 
-        BadgesServer server = new BadgesServer(version, port, ssl, set.valueOf(specThreads), curseToken);
+        BadgesServer server = new BadgesServer(version, port, ssl, curseToken);
         Runtime.getRuntime().addShutdownHook(new Thread(server::shutdown));
         LOGGER.info("Initialisation complete.");
     }
